@@ -7,8 +7,8 @@
 
 ***
 ###Requirements :
-For this coursework, you are asked to develop a website similar to www.reddit.com. Reddit is a news
-aggregator – that is, you can submit links to webpages together with a short description, and the
+For this coursework, you are asked to develop a website similar to [Reddit](www.reddit.com).
+ Reddit is a news aggregator – that is, you can submit links to webpages together with a short description, and the
 community of users (yourself and other users) can post comments on the links, as well as upvote or
 downvote them. In preparation for this coursework, you are advised to visit Reddit and browse through
 the site, making a note of its features.
