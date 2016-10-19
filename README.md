@@ -14,17 +14,17 @@ downvote them. In preparation for this coursework, you are advised to visit Redd
 the site, making a note of its features.
 You are not asked to develop a fully-fledged version of Reddit. Instead, your version should have the
 following minimum set of features:
-1. A page showing a single list of links submitted by users
-2. A page where all comments about a link can be seen (as a single list) and new comments
+- A page showing a single list of links submitted by users
+- A page where all comments about a link can be seen (as a single list) and new comments
 submitted
-3. A means of upvoting or downvoting links
+- A means of upvoting or downvoting links
 Logins and registrations are not required for this coursework – hence when links and comments are
 submitted, the application should also ask for the user’s name.
 Extra marks are available if the following features are added:
-4. Pagination of links – i.e, links are not shown all on one page, but might be shown 20 links at a
+- Pagination of links – i.e, links are not shown all on one page, but might be shown 20 links at a
 time (clicking on ‘Next Page’ then shows the next 20 links)
-5. Sorting of links – by votes or date submitted
-6. Threading of comments (as done on reddit)
+- Sorting of links – by votes or date submitted
+- Threading of comments (as done on reddit)
 For this coursework, the following is required:
 - a survey of similar existing sites, comparing and contrasting their features
 - a discussion of the requirements for your site (these are given briefly above but need fleshing out)
