@@ -56,46 +56,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<hr>
         <div class="row">
             <main class="col-sm-9">
+
+                            <?php //Start the loop
+                            foreach($posts as $post){?>
 							<div class="media">
   							<a class="media-left" href="#">
-    							<img class="media-object" src="http://placehold.it/64x64" alt="Generic placeholder image">
+                            <img class="media-object" src="<?php echo $post->Link; ?>" alt="Generic placeholder image" width='64' height='64'>
   							</a>
   							<div class="media-body">
-    							<h4 class="media-heading">Title</h4>
-    							<a href="#"><p class="lead">The content here</p></a>
-										<i class="fa fa-user" aria-hidden="true"></i><span> Bob</span>
-										<i class="fa fa-calendar" aria-hidden="true"></i><span> 12/3/2014</span>
-										<i class="fa fa-tag" aria-hidden="true"></i><span> Movie</span>
-										<i class="fa fa-fa-comments-o" aria-hidden="true"></i><span> 200</span>
-										<i class="fa fa-reddit-alien" aria-hidden="true"></i><span> 3000</span>
-										<span><button type="button" class="btn btn-success" name="button"><i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
-										<button type="button" class="btn btn-danger" name="button"><i class="fa fa-hand-o-down" aria-hidden="true"></i></button></span>
+                            <h4 class="media-heading"><?php echo $post->Title;?></h4>
+                            <a href="#"><p class="lead"><?php echo $post->Content;?></p></a>
+                            <div class="row">
+                            <div class="col-xs-8">
+                            <i class="fa fa-user" aria-hidden="true"></i><span> <?php echo $post->Author;?></span>
+                            <i class="fa fa-calendar" aria-hidden="true"></i><span><?php echo $post->Date;?></span>
+                            <i class="fa fa-tag" aria-hidden="true"></i><span><?php echo $post->Tag;?></span>
+<a href="index.php/SingleController/getData/<?php echo $post->id;?>"> <?php echo $post->Rate;?></span>
+                            <i class="fa fa-reddit-alien" aria-hidden="true"></i></a></div>
+                            <div class="col-xs-4">
+                                        <span><form class="form" action="/index.php/Homecontroller/rateLink" method="post">
+                                        <input type="hidden" name="id" value="<?php echo $post->id; ?>" >
+                                        <button type="submit" class="btn btn-success" name="plus"><i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
+                                        <button type="submit" class="btn btn-danger" name="minus"><i class="fa fa-hand-o-down" aria-hidden="true"></i></button></form>
+                                        </span></div>
+                                        </div> <!-- end of row -->
 									</div>
 								</div>
-							<hr>
-							<div class="media">
-								<a class="media-left" href="#">
-									<img class="media-object" src="http://placehold.it/64x64" alt="Generic placeholder image">
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading">Title</h4>
-									<a href="#"><p class="lead">The content here</p></a>
-										<i class="fa fa-user" aria-hidden="true"></i><span> Bob</span>
-										<i class="fa fa-calendar" aria-hidden="true"></i><span> 12/3/2014</span>
-										<i class="fa fa-tag" aria-hidden="true"></i><span> Movie</span>
-										<i class="fa fa-fa-comments-o" aria-hidden="true"></i><span> 200</span>
-										<i class="fa fa-reddit-alien" aria-hidden="true"></i><span> 3000</span>
-										<span><button type="button" class="btn btn-success" name="button"><i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
-										<button type="button" class="btn btn-danger" name="button"><i class="fa fa-hand-o-down" aria-hidden="true"></i></button></span>
-									</div>
-								</div>
-							<hr>
+                            <hr>
+                              <?php } ?>
             </main>
 						<aside class="col-sm-3">
 						<h4>Add new Link</h4>
 						<button type="button" class="btn btn-primary" name="button" data-toggle="modal" data-target="#addNewModal"><i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
 						</aside>
-        </div>
+    </div>
     </div>
 	</section>
 
@@ -116,16 +110,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Add New Link</h4>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
+            <form class="form" action="/index.php/Homecontroller/addNewArticle" method="post">
+            <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" name="Title" class="form-control" id="Title" placeholder="Title">
+            </div>
+            <div class="form-group">
+            <label for="Author">Username</label>
+            <input type="text" name="Author" class="form-control" id="Author" placeholder="Username">
+            </div>
+            <input type="hidden" name="Date" value="2016-12-02">
+            <div class="form-group">
+            <label for="Link">Link</label>
+            <input type="text" class="form-control" id="Link" name="Link" placeholder="Insert Your Link">
+            </div>
+            <div class="form-group">
+            <label for="ImageUrl">Image Url</label>
+            <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" placeholder="Insert Your Image Url">
+            </div>
+            <div class="form-group">
+            <label for="Link">Description</label>
+            <input type="text" class="form-control" id="Description" name="Content" placeholder="Insert content description">
+            </div>
+            <div class="form-group">
+            <label for="Tag">Tag</label>
+            <input type="text" class="form-control" id="Tag" name="Tag" placeholder="Chose the Tag">
+            </div>
+
+
+                </div>
+        <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <input type="submit" class="btn btn-primary" value="Save">
       </div>
     </div>
+</form>
   </div>
 </div>
 </body>
