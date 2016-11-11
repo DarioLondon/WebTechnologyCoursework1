@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Coursework1</title>
     <!-- CORE CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"  integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../user_guide/_static/css/style.css" media="screen" title="Custom CSS">
+    <link rel="stylesheet" href="<?php echo base_url();?>user_guide/_static/css/style.css" media="screen" title="Custom CSS">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
   </head>
   <body>
@@ -154,5 +154,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- CORE JAVASCRIPT -->
   <script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-  <script type="text/javascript" scr="js/app.js"></script>
+<script type="text/javascript" scr="<?php echo base_url()?>user_guide/_static/js/main.js"></script>
+
 </html>
