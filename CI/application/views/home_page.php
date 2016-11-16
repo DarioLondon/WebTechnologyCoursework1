@@ -7,9 +7,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coursework1</title>
     <!-- CORE CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"  integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo base_url();?>user_guide/_static/css/style.css" media="screen" title="Custom CSS">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('asset/css/style.css');?>" media="screen" title="Custom CSS">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" >
+    <script   src="https://code.jquery.com/jquery-3.1.1.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
+   <script  scr="../asset/js/main.js"></script>
   </head>
   <body>
 		<!--NAVIGATION SECTION
@@ -33,7 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<section id="content">
     <div class="container">
 				<div class="row">
-						<div class="pull-right">
+
 							<form class="form-inline" action="index.html" method="post">
 								<div class="form-group">
 									<label for="rate">Rate</label>
@@ -51,44 +54,61 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 						<button type="submit" class="btn btn-primary" name="button">Filter</button>
 							</form>
-						</div>
+              <div class="pull-right">
+                <h4>Add new Link</h4>
+              <button type="button" class="btn btn-primary" name="button" data-toggle="modal" data-target="#addNewModal"><i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
 				</div>
+      </div>
 				<hr>
         <div class="row">
-            <main class="col-sm-9">
+            <main class="col-xs-12  clearfix">
+              <?php //Start the loop
+              foreach($posts as $post){?>
 
-                            <?php //Start the loop
-                            foreach($posts as $post){?>
-							<div class="media">
-  							<a class="media-left" href="#">
-                            <img class="media-object" src="<?php echo $post->Link; ?>" alt="Generic placeholder image" width='64' height='64'>
-  							</a>
-  							<div class="media-body">
-                            <h4 class="media-heading"><?php echo $post->Title;?></h4>
-                            <a href="#"><p class="lead"><?php echo $post->Content;?></p></a>
-                            <div class="row">
-                            <div class="col-xs-8">
-                            <i class="fa fa-user" aria-hidden="true"></i><span> <?php echo $post->Author;?></span>
-                            <i class="fa fa-calendar" aria-hidden="true"></i><span><?php echo $post->Date;?></span>
-                            <i class="fa fa-tag" aria-hidden="true"></i><span><?php echo $post->Tag;?></span>
-<a href="index.php/SingleController/getData/<?php echo $post->id;?>"> <?php echo $post->Rate;?></span>
-                            <i class="fa fa-reddit-alien" aria-hidden="true"></i></a></div>
-                            <div class="col-xs-4">
-                                        <span><form class="form" action="/index.php/Homecontroller/rateLink" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $post->id; ?>" >
-                                        <button type="submit" class="btn btn-success" name="plus"><i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
-                                        <button type="submit" class="btn btn-danger" name="minus"><i class="fa fa-hand-o-down" aria-hidden="true"></i></button></form>
-                                        </span></div>
-                                        </div> <!-- end of row -->
-									</div>
-								</div>
-                            <hr>
-                              <?php } ?>
-            </main>
-						<aside class="col-sm-3">
-						<h4>Add new Link</h4>
-						<button type="button" class="btn btn-primary" name="button" data-toggle="modal" data-target="#addNewModal"><i class="fa fa-plus" aria-hidden="true"></i> Add New</button>
-						</aside>
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="card" style="max-height:580px;height:580px;">
+                  <?php
+                  $pattern=$post->Link;
+                      if(preg_match("/youtube.com/i", $pattern)){?>
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="<?php echo $post->Link;?>" allowfullscreen style="max-width:338px;max-height:190.18px;width:338px;"></iframe>
+                          </div>
+                  <?php }else{?>
+         <img class="card-img-top w-100" src="<?php echo $post->Link;?>" style="max-width:338px;max-height:190.18px;width:338px;" alt="Card image cap"/>
+                      <?php }?>
+
+                  <div class="card-block">
+                    <h5 class="card-title"><?php echo $post->Title;?></h5>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-user" aria-hidden="true"></i><span> <?php echo $post->User;?></span></li>
+                    <li class="list-group-item"><i class="fa fa-calendar" aria-hidden="true"></i><span> <?php echo preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$post->Date);?></span></li>
+                    <li class="list-group-item"><i class="fa fa-tag" aria-hidden="true"></i><span> <?php echo $post->Tag;?></span></li>
+                  </ul>
+                  <div class="card-block">
+                    <a href="index.php/SingleController/getData/<?php echo $post->Id;?>" class="btn btn-primary">Card link</a>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                      <h4>Rate <span class="tag tag-primary"><?php echo $post->Rate; ?></span></h4>
+                    </div>
+                    <div class="col-xs-6">  <form class="form" action="/index.php/Homecontroller/rateLink" method="post">
+                    <input type="hidden" name="id" value="<?php echo $post->Id; ?>" >
+                    <button type="submit" class="btn btn-success" name="plus"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
+                    <button type="submit" class="btn btn-danger" name="minus"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>
+                  </form>
+                </div>
+                </div>
+
+
+
+                  </div>
+                  </div>
+                </div>
+
+  <?php } ?>
+</main>
+
     </div>
     </div>
 	</section>
@@ -150,10 +170,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </form>
   </div>
 </div>
-</body>
-  <!-- CORE JAVASCRIPT -->
-  <script   src="https://code.jquery.com/jquery-3.1.1.js"   integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="   crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
-<script type="text/javascript" scr="<?php echo base_url()?>user_guide/_static/js/main.js"></script>
 
+  <!-- CORE JAVASCRIPT -->
+
+</body>
 </html>

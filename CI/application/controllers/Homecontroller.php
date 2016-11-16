@@ -6,7 +6,7 @@ class HomeController extends CI_Controller {
 	public function __construct(){
 	parent::__construct();
 	$this->load->helper('url');
-    $this->load->Model('home');
+  $this->load->Model('home');
 
         }
 
@@ -20,15 +20,12 @@ class HomeController extends CI_Controller {
     public function addNewArticle(){
         $data=array(
             "Title"=>$this->input->post('Title'),
-            "Author"=>$this->input->post('Author'),
+            "User"=>$this->input->post('Author'),
             "Date"=>$this->input->post('Date'),
             "Link"=>$this->input->post('Link'),
-            "ImageUrl"=>$this->input->post('ImageUrl'),
             "Content"=>$this->input->post('Content'),
             "Tag"=>$this->input->post('Tag'),
-            "Rate"=>0,
-            "TopicId"=>13,
-            "Comments"=>0
+            "Rate"=>0
         );
         $this->home->addNew($data);
         redirect(base_url());

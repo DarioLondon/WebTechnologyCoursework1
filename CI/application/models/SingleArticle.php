@@ -8,11 +8,18 @@ function __construct(){
 }
 
 function getDAta($id){
-    $this->db->where('id',$id);
-    $res=$this->db->get('Article');
+
+   $this->db->select('*');
+    $this->db->from('ArticleList');
+    $this->db->join('Comments', 'ArticleList.Id = Comments.TopicId');
+    $this->db->where('ArticleList.Id', $id);
+    $res=$this->db->get();
     return $res->result();
 
 
+}
+function addComment($data){
+    $this->db->insert('Comments',$data);
 }
 
 

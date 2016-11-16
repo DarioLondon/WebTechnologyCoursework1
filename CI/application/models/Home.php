@@ -8,7 +8,7 @@ class Home extends CI_Model{
   }
 
   public function getAll(){
-      $data=$this->db->get('Article');
+      $data=$this->db->get('ArticleList');
       return $data->result();
   }
 
@@ -36,20 +36,20 @@ class Home extends CI_Model{
   }
   public function addNew($data){
 
-    $this->db->insert('Article',$data);
+    $this->db->insert('ArticleList',$data);
   }
   public function addOne($id){
 
      $this->db->set('Rate', 'Rate+1', FALSE);
      $this->db->where('id', $id);
-     $this->db->update('Article');
+     $this->db->update('ArticleList');
   }
 
   public function minusOne($id){
 
       $this->db->set('Rate', 'Rate-1',FALSE);
       $this->db->where('id', $id);
-      $this->db->update('Article');
+      $this->db->update('ArticleList');
   }
 
 }
