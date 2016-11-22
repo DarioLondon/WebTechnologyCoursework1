@@ -1,31 +1,18 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coursework1</title>
-    <!-- CORE CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="<?php echo base_url('asset/css/style.css');?>" media="screen" title="Custom CSS">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  </head>
-  <body>
-    <!--NAVIGATION SECTION
-    ============================-->
-  <div class="conatiner">
+ <body>
+		<!--NAVIGATION SECTION
+	  	============================-->
+  <div class="container">
     <nav class="navbar navbar-full navbar-fixed-top navbar-dark bg-primary ">
-    <a class="navbar-brand" href="/"><i class="fa fa-newspaper-o fa-2x" aria-hidden="true"></i></a>
+    <a class="navbar-brand" href="/">
+    <img src="http://clipartsy.com/SVG/Animal/elephant_robin_egg_blue_animal.png" width="80" height="80" class="d-inline-block align-top" alt="Logo">
+    <span id="logo-text">STACKOVERNEWS</span>
+  </a>
     <ul class="nav navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/"> <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <form class="form-inline float-xs-right" >
-      <input class="form-control" type="text" placeholder="Search Topic">
-      <button class="btn btn-outline-info" type="submit">Search</button>
-    </form>
+   
   </nav>
 </div>
 <!--MAIN SECTION
@@ -34,10 +21,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="container">
         <div class="row">
             <main class="col-xs-12 col-sm-5 col-md-8">
+              <?php foreach($posts as $post){
+                 
+                  $pattern=$post->Link;
+                  $link=pathinfo($post->Link);
+                      if(preg_match("/youtube.com/i", $pattern)){ ?>
+                          <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src='<?php echo $post->Link;?>' allowfullscreen style="width:100%; height:auto;"></iframe>
+                          </div>
+                       <?php } elseif($link['extension']=='jpg'  || $link['extension']=='jpeg' || $link['extension']=='gif' || $link['extension']=='png'){ ?>    
+         <img class="card-img-top w-100" src="<?php echo $post->Link;?>" style="max-width:338px;max-height:190.18px;width:338px;" alt="Card image cap"/>
+                      <?php }else{ ?>
+                        <img class="card-img-top w-100" src="http://www.vanparys.eu/wp-content/themes/123ecology/assets/img/placeholder-page-533.png" style="width:100%; height:auto;" alt="Card image cap"/>
+                      <?php }?>
+                      
 
-                <img class="imge-resonsive" src="<?php echo $posts[0]->Link;?>" alt="Generic placeholder image" width='100%' height='auto'>
-                <h4 class="media-heading"><?php echo $posts[0]->Title;?></h4>
-                <p class="lead"><?php echo $posts[0]->Content;?></p>
+                <h2 class="media-heading"><?php echo $post->Title;?></h2>
+                <br>
+                <br>
+                <p class="lead"><?php echo $post->Content;?></p>
 
             </main>
             <aside class="col-xs-12 col-sm-7 col-md-4">
@@ -47,25 +49,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <p class="list-group-item-text"></p>
                   </li>
                   <li  class="list-group-item">
-                    <p class="list-group-item-text">Author: <?php echo $posts[0]->User;?><p>
+                    <p class="list-group-item-text">Author: <?php echo $post->User;?><p>
                   </li>
                   <li  class="list-group-item ">
-                    <p class="list-group-item-text">Date: <?php  echo preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$posts[0]->Date);?></p>
+                    <p class="list-group-item-text">Date: <?php  echo preg_replace("/(\d+)\D+(\d+)\D+(\d+)/","$3-$2-$1",$post->Date);?></p>
                   </li>
                   <li  class="list-group-item ">
-                    <p class="list-group-item-text">Tag: <?php echo $posts[0]->Tag;?></p>
+                    <p class="list-group-item-text">Tag: <?php echo $post->Tag;?></p>
                   </li>
                   <li  class="list-group-item ">
-                    <p class="list-group-item-text">Comments:</p>
+                    <p class="list-group-item-text">Visit the Link: <a href="<?php echo $post->Link;?>" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a> </p>
                   </li>
                   <li class="list-group-item ">
                     <div class="row">
                         <div class="col-xs-6">
-                      <h4>Rate <span class="tag tag-primary"><?php echo $posts[0]->Rate;?></span></h4>
+                      <h4>Rate <span class="tag tag-primary"><?php echo $post->Rate;?></span></h4>
                     </div>
                     <div class="col-xs-6">
                     <form class="form" action="/index.php/Homecontroller/rateLink" method="post">
-                      <input type="hidden" name="id" value="<?php echo $posts[0]->Id; ?>" >
+                      <input type="hidden" name="id" value="<?php echo $post->Id; ?>" >
                       <button type="submit" class="btn btn-success" name="plus"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></button>
                       <button type="submit" class="btn btn-danger" name="minus"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button>
                     </form>
@@ -75,15 +77,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </ul>
 
         </aside>
+            <?php } ?>    
       </div>
     </div>
   </section>
   <section id="comments">
     <div class="container clearfix">
       <div class="row">
-        <div class="col-xs-5">
+        <div class="col-xs-12">
           <form class="" action="/index.php/SingleController/addComments" method="post">
-            <input type="hidden" name="id" value="<?php echo $posts[0]->Id;?>">
+            <input type="hidden" name="articleId" value="<?php echo $posts[0]->Id;?>">
+             <input type="hidden" name="parentId" value="0">
             <div class="form-group">
               <label for="username">Username : </label>
               <input type="text" id='username' class="form-control" name="username" placeholder="@username" required>
@@ -98,55 +102,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </form>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-10">
-          <br>
-          <br>
-          <hr>
-          <h4>Comments:</h4>
-          <ul class="list">
-            <li>
-              <div class="media">
-                <a class="media-left" href="#">
-                  <img class="media-object" src="http://placehold.it/64x64" alt="Generic placeholder image">
-                </a>
-                <div class="media-body">
-                  <h4 class="media-heading"><?php echo $posts[0]->Username;?></h4>
-                  <?php echo $posts[0]->Text;?>
-                </div>
-                <div class="media-footer">
-                  <button id="btn-reply" class="btn">Replay</button>
-                  <form id="form-rep" action="index.html" method="post" style="display:none;">
-                    <div class="form-group">
-                      <label for="username">Username :</label>
-                      <input type="text" id='username' class="form-control" name="usernname" placeholder="@username" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="comment">Comment:</label>
-                      <textarea type="text" id='username' class="form-control" name="usernname" required  rows="6" placeholder="Your Comment.... :-)"></textarea>
-                    </div>
-                    <br>
-                    <button type="button" name="button" class="btn btn-danger">Cancel</button>
-                    <button type="submit" name="button" class="btn btn-primary pull-right">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </li>
-          </ul>
-      </div>
-    </div>
-  </section>
-  <footer>
-		<div class="container-fluid ">
-			<div class="row text-xs-center">
-				<p>&copy;Dario Guida W1409831</p>
-			</div>
-		</div>
-	</footer>
-
-<!-- CORE JAVASCRIPT -->
-<script  src="https://code.jquery.com/jquery-3.1.1.js"></script>
-<script  src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
-<script  scr="<?php echo base_url();?>asset/js/main.js"></script>
-</body>
-</html>

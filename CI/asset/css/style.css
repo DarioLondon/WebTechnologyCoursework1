@@ -1,6 +1,54 @@
-body{
-  margin-top:66px;
+body {
+    margin-top: 66px;
 }
-#content{
-  padding:40px 20px 0 20px;
+
+#content {
+    padding: 40px 20px 0 20px;
+}
+
+.embed-responsive-item {
+    max-width: 338px;
+    max-height: 190.18px;
+    width: 338px;
+}
+
+.homeImg {
+    max-width: 338px;
+    max-height: 190.18px;
+    width: 338px;
+}
+
+.card {
+    max-height: 580px;
+    height: 580px;
+}
+
+#logo-text {
+    color: rgb(33, 204, 203);
+}
+
+
+/*===========================
+    COMMENT SECTION style
+*/
+
+ul {
+    list-style: none;
+}
+
+@media screen and (max-width:560px) {
+    .embed-responsive-item {
+        max-width: 100%;
+        max-height: auto;
+        width: 100%;
+    }
+    .homeImg {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+    }
+    .card {
+        max-height: 100%;
+        height: auto;
+    }
 }

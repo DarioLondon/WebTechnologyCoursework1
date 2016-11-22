@@ -1,9 +1,16 @@
+$(document).ready(function() {
 
-$(document).ready(function(){
-    $("#form-rep").hide();
+    
+    $("a.reply").click(function(e) {
+        e.preventDefault();
+        //Retrive data Attribute from the Link
+        $id = $(this).data('id');
+        //Targeting the form to show it 
+        $("#form-" + $id).toggle();
+    });
 
-    $("#btn-reply").click(function(){
 
-        $("#form-rep").show();
-  });
+
+
+
 });
